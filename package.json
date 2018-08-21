@@ -17,6 +17,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "classnames": "^2.2.6",
     "react-router-dom": "^4.3.1"
   }
 }

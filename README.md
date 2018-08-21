@@ -28,5 +28,5 @@ yarn test
 yarn add @material-ui/core
 yarn add typeface-roboto
 yarn add @material-ui/icons
-npm install react-router-dom -D
+npm install react-router-dom classnames -D
 ```
