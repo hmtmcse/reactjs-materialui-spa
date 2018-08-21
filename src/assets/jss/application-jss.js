@@ -30,12 +30,26 @@ const loginPageJSS = theme => ({
 });
 
 const drawerWidth = 240;
-const mainLayoutJSS = theme => ({
-    root: {
-        display: 'flex',
+const navigationElementJSS = theme => ({
+    drawerPaper: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
-    toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
+    drawerPaperClose: {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing.unit * 7,
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing.unit * 9,
+        },
     },
     toolbarIcon: {
         display: 'flex',
@@ -43,6 +57,9 @@ const mainLayoutJSS = theme => ({
         justifyContent: 'flex-end',
         padding: '0 8px',
         ...theme.mixins.toolbar,
+    },
+    toolbar: {
+        paddingRight: 24, // keep right padding when drawer closed
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -69,25 +86,20 @@ const mainLayoutJSS = theme => ({
     title: {
         flexGrow: 1,
     },
-    drawerPaper: {
-        position: 'relative',
-        whiteSpace: 'nowrap',
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
+    removeDecoration: {
+        position: "relative",
+        display: "block",
+        textDecoration: "none",
+        "&:hover,&:focus,&:visited,&": {
+            color: "#FFFFFF"
+        }
     },
-    drawerPaperClose: {
-        overflowX: 'hidden',
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        width: theme.spacing.unit * 7,
-        [theme.breakpoints.up('sm')]: {
-            width: theme.spacing.unit * 9,
-        },
+});
+
+
+const mainLayoutJSS = theme => ({
+    root: {
+        display: 'flex',
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -105,6 +117,7 @@ const mainLayoutJSS = theme => ({
 });
 
 export {
+    navigationElementJSS,
     loginPageJSS,
     mainLayoutJSS
 };

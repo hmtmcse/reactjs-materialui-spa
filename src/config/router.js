@@ -5,22 +5,26 @@ import DashboardPage from './../components/pages/dashboard-page';
 import MainLayout from './../layouts/main-layout';
 
 
-const routes = [
+const PageRoutes = [
     {
         path: "/dashboard",
+        name: "Dashboard",
         component: DashboardPage
-    }
-];
-
-const layoutsRoutes = [
-    {
-        path: "/",
-        component: MainLayout,
-        isExact:true
     },
     {
         path: "/login",
-        component: LoginPage
+        name: "Login",
+    }
+];
+
+const LayoutsRoutes = [
+    {
+        path: "/login",
+        component: LoginPage,
+    },
+    {
+        path: "/",
+        component: MainLayout,
     }
 ];
 
@@ -37,7 +41,7 @@ const RouteWithSubRoutes = route => (
 const AppRouter = () => (
     <Router>
         <React.Fragment>
-            {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+            {PageRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
         </React.Fragment>
     </Router>
 );
@@ -45,12 +49,14 @@ const AppRouter = () => (
 const LayoutRouter = () => (
     <Router>
         <React.Fragment>
-            {layoutsRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+            {LayoutsRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
         </React.Fragment>
     </Router>
 );
 
 export {
+    PageRoutes,
     AppRouter,
+    LayoutsRoutes,
     LayoutRouter
 };

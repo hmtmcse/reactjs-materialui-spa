@@ -1,50 +1,93 @@
 import React, { Component } from 'react'
 import {
-    ListItem, ListItemIcon, ListItemText
+    AppBar, Badge, Divider, Drawer, IconButton,
+    ListItem, ListItemIcon, ListItemText, MenuItem, MenuList, Toolbar, Typography, withStyles
 } from '@material-ui/core';
+import { NavLink } from "react-router-dom";
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import {PageRoutes} from './../../config/router';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import MenuIcon from "../../../node_modules/@material-ui/icons/Menu";
+import {navigationElementJSS} from "../../assets/jss/application-jss";
+
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 
-export default class NavigationElement extends Component {
+class NavigationElement extends Component {
+
+    state = {
+        open: true,
+    };
+
+    handleDrawerOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleDrawerClose = () => {
+        this.setState({ open: false });
+    };
 
     render(){
+        const { classes } = this.props;
+
         return (
-            <div>
-                <ListItem button>
-                    <ListItemIcon>
-                        <DashboardIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <ShoppingCartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Orders" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <PeopleIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Customers" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <BarChartIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Reports" />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <LayersIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Integrations" />
-                </ListItem>
-            </div>
+            <React.Fragment>
+                <AppBar position="absolute" className={classNames(classes.appBar, this.state.open && classes.appBarShift)}>
+                    <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                        <IconButton
+                            color="inherit"
+                            onClick={this.handleDrawerOpen}
+                            className={classNames(classes.menuButton,this.state.open && classes.menuButtonHidden)}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" noWrap className={classes.title}>
+                            Dashboard
+                        </Typography>
+                        <IconButton color="inherit">
+                            <Badge badgeContent={4} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Drawer variant="permanent" classes={{paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose)}}>
+                    <div className={classes.toolbarIcon}>
+                        <Typography variant="title" color="primary" align="center" noWrap>
+                            HMTMCSE
+                        </Typography>
+                        <IconButton onClick={this.handleDrawerClose}>
+                            <ChevronLeftIcon />
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <MenuList>
+                        {PageRoutes.map((route, i) => {
+                            return(
+                                <NavLink to={route.path} className={classes.removeDecoration} key={i}>
+                                    <MenuItem button>
+                                        <ListItemIcon>
+                                            <DashboardIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary={route.name} />
+                                    </MenuItem>
+                                </NavLink>
+                            )
+                        })}
+                    </MenuList>
+                </Drawer>
+            </React.Fragment>
         );
     }
 }
+
+NavigationElement.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(navigationElementJSS)(NavigationElement);
