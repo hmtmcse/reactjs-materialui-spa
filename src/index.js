@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginPage from './components/pages/login-page';
+import AppRouter from './config/router';
 
-ReactDOM.render(<LoginPage/>, document.getElementById('root'));
+ReactDOM.render(<AppRouter/>, document.getElementById('root'));
