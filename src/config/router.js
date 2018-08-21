@@ -2,9 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from './../components/pages/login-page';
 import DashboardPage from './../components/pages/dashboard-page';
+import TablePage from './../components/pages/table-page';
+import FormPage from './../components/pages/form-page';
 import MainLayout from './../layouts/main-layout';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
+import TableChart from '@material-ui/icons/TableChart';
+import Edit from '@material-ui/icons/Edit';
 
 
 const PageRoutes = [
@@ -13,6 +17,18 @@ const PageRoutes = [
         name: "Dashboard",
         icon:DashboardIcon,
         component: DashboardPage
+    },
+    {
+        path: "/table",
+        name: "Table",
+        icon:TableChart,
+        component: TablePage
+    },
+    {
+        path: "/form",
+        name: "Form",
+        icon:Edit,
+        component: FormPage
     },
     {
         icon: AssignmentInd,
