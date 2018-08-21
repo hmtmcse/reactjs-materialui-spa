@@ -1,9 +1,10 @@
 # React-JS & Material-UI SPA
 This is the Sample of Single Page Application (SPA) by React js and Material UI, Feel free to use it anywhere.
 
+<br><br>
 ### How to Bismillah/Start React-JS?
 
-```
+```bash
 npm install -g yarn
 yarn create react-app application-name
 
@@ -20,9 +21,10 @@ yarn build
 yarn test
 ```
 
+<br><br>
 ### Adding Supporting Dependency for Material-UI and SPA
 
-```
+```bash
 yarn add @material-ui/core
 yarn add typeface-roboto
 yarn add @material-ui/icons
