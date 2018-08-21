@@ -10,6 +10,7 @@ import {LayoutsRoutes} from './../config/router';
 import {AppRouter} from './../config/router';
 import {PageRoutes} from "../config/router";
 import Route from "react-router-dom/es/Route";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 class MainLayout extends Component {
