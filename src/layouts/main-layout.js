@@ -7,7 +7,9 @@ import PropTypes from 'prop-types';
 import { mainLayoutJSS } from './../assets/jss/application-jss';
 import NavigationElement from './../components/elements/navigation-element';
 import {LayoutsRoutes} from './../config/router';
+import {AppRouter} from './../config/router';
 import {PageRoutes} from "../config/router";
+import Route from "react-router-dom/es/Route";
 
 
 class MainLayout extends Component {
@@ -16,9 +18,14 @@ class MainLayout extends Component {
         let url = this.props.location.pathname;
         if (url === "/"){
             return true;
-        }else{
-            return false;
         }
+        let isMain = true;
+        LayoutsRoutes.map((route, i) => {
+            if (route.path === url){
+                isMain = false;
+            }
+        });
+        return isMain;
     }
 
     render () {
@@ -31,18 +38,9 @@ class MainLayout extends Component {
                     <NavigationElement/>
                     <main className={classes.content}>
                         <div className={classes.appBarSpacer}/>
-                        <Typography variant="display1" gutterBottom>
-                            Orders
-                        </Typography>
-                        <Typography component="div">
-
-                        </Typography>
-                        <Typography variant="display1" gutterBottom>
-                            Products
-                        </Typography>
-                        <div className={classes.tableContainer}>
-
-                        </div>
+                        {PageRoutes.map((route, key) =>{
+                            return <Route path={route.path} component={route.component} key={key} />;
+                        })}
                     </main>
                 </div>) : (<React.Fragment/>)};
             </React.Fragment>

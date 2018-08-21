@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {
     AppBar, Badge, Divider, Drawer, IconButton,
-    ListItem, ListItemIcon, ListItemText, MenuItem, MenuList, Toolbar, Typography, withStyles
+    Icon, ListItemIcon, ListItemText, MenuItem, MenuList, Toolbar, Typography, withStyles
 } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import {PageRoutes} from './../../config/router';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -17,6 +16,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Route from "react-router-dom/es/Route";
 
 
 class NavigationElement extends Component {
@@ -47,7 +47,7 @@ class NavigationElement extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                            Dashboard
+                            HMTMCSE
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -59,7 +59,7 @@ class NavigationElement extends Component {
                 <Drawer variant="permanent" classes={{paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose)}}>
                     <div className={classes.toolbarIcon}>
                         <Typography variant="title" color="primary" align="center" noWrap>
-                            HMTMCSE
+                            Navigation
                         </Typography>
                         <IconButton onClick={this.handleDrawerClose}>
                             <ChevronLeftIcon />
@@ -72,7 +72,11 @@ class NavigationElement extends Component {
                                 <NavLink to={route.path} className={classes.removeDecoration} key={i}>
                                     <MenuItem button>
                                         <ListItemIcon>
-                                            <DashboardIcon />
+                                            {typeof route.icon === "string" ? (
+                                                <Icon>{route.icon}</Icon>
+                                            ) : (
+                                                <route.icon />
+                                            )}
                                         </ListItemIcon>
                                         <ListItemText primary={route.name} />
                                     </MenuItem>
