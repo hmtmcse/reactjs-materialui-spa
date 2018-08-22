@@ -1,43 +1,92 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-    Fade, LinearProgress, Checkbox
+    Fade, LinearProgress, Checkbox,Snackbar
 } from '@material-ui/core';
+
+
+const SNACK_BAR_AUTO_HIDE_DURATION = 3000;
 
 export default class AppComponent extends Component {
 
-    state = {
-        checkedA: true,
-        checkedB: true,
-        checkedF: true,
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSystemProgressBarEnabled: false,
+            showSystemSnackBar: false,
+            systemSnackBarVariant: "success",
+            systemSnackBarMessage: "Empty Message",
+        };
+    }
+
+
+
+    showProgressbar(){this.setState({isSystemProgressBarEnabled: true})}
+
+    hideProgressbar(){this.setState({isSystemProgressBarEnabled: false})}
+
+    closeSnackBar(){this.setState({showSystemSnackBar: false})}
+
+    showSuccessInfo(message){
+        this.setState({
+            showSystemSnackBar: true,
+            systemSnackBarVariant: "success",
+            systemSnackBarMessage: message
+        });
+    }
+
+    showErrorInfo(message){
+        this.setState({
+            showSystemSnackBar: true,
+            systemSnackBarVariant: "error",
+            systemSnackBarMessage: message
+        });
+    }
+
+    handleChange = () => event => {
+        this.setState({isSystemProgressBarEnabled: event.target.checked});
     };
 
-    handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
-    };
-
-    appRender(){
+    appRender() {
         return (
             <h1>AppComponent</h1>
         );
     }
 
-    render(){return(
-        <React.Fragment>
+    render() {
+        return (
+            <React.Fragment>
 
-            {
-                this.state.checkedA ? ( <Fade in={this.state.checkedA}>
-                    <LinearProgress color="primary" />
-                </Fade>) : ""
-            }
+                {
+                    this.state.isSystemProgressBarEnabled ? (<Fade in={this.state.isSystemProgressBarEnabled}>
+                        <LinearProgress color="primary"/>
+                    </Fade>) : ""
+                }
+
+                {
+                    this.state.showSystemSnackBar ? (
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            open={this.state.showSystemSnackBar}
+                            autoHideDuration={SNACK_BAR_AUTO_HIDE_DURATION}
+                            onClose={this.closeSnackBar}
+                        />
+                    ) : ""
+                }
 
 
-            <Checkbox
-                checked={this.state.checkedA}
-                onChange={this.handleChange('checkedA')}
-                value="checkedA"
-            />
+                <Checkbox
+                    checked={this.state.isSystemProgressBarEnabled}
+                    onChange={this.handleChange('checkedA')}
+                    value="checkedA"
+                />
 
-            {this.appRender()}
-        </React.Fragment>
-    ) }
+                {this.appRender()}
+            </React.Fragment>
+        )
+    }
 }
