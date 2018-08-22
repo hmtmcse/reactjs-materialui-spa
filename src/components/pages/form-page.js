@@ -14,11 +14,17 @@ const styles = theme => ({
 });
 
 class FormPage extends Component {
-    state = {
-        countrySelect: 'bangladesh',
-        states: [],
-        genderRadio: '',
-    };
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            countrySelect: 'bangladesh',
+            states: [],
+            genderRadio: '',
+        };
+    }
+
 
     countrySelectChange = event => {
         this.setState({countrySelect:event.target.value});
