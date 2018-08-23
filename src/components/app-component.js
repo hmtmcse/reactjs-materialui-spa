@@ -20,6 +20,20 @@ export default class AppComponent extends Component {
         };
     }
 
+    postToApi(){}
+
+    deleteToApi(){}
+
+    getToApi(){}
+
+    getList(){}
+
+    getBy(){}
+
+    postBy(){}
+
+    postList(){}
+
 
 
     showProgressbar(){this.setState({isSystemProgressBarEnabled: true})}
