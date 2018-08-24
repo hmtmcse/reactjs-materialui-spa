@@ -1,4 +1,4 @@
-import AppComponent from "./../app-component";
+import AppComponent from "../system/app-component";
 import React from 'react'
 
 export default class AppComponentExp extends AppComponent {

@@ -8,4 +8,4 @@ import AppComponentExp from './components/experiment/app-component-exp';
 let classTestExp = new ClassTestExp();
 classTestExp.truFunction();
 
-ReactDOM.render(<AppComponentExp/>, document.getElementById('root'));
+ReactDOM.render(<LayoutRouter/>, document.getElementById('root'));

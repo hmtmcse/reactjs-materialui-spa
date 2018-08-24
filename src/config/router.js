@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoginPage from './../components/pages/login-page';
 import DashboardPage from './../components/pages/dashboard-page';
+import ComponentDemoPage from './../components/pages/component-demo-page';
 import TablePage from './../components/pages/table-page';
 import FormPage from './../components/pages/form-page';
 import MainLayout from './../layouts/main-layout';
@@ -29,6 +30,12 @@ const PageRoutes = [
         name: "Form",
         icon:Edit,
         component: FormPage
+    },
+    {
+        path: "/component-demo",
+        name: "Component Demo",
+        icon:Edit,
+        component: ComponentDemoPage
     },
     {
         icon: AssignmentInd,

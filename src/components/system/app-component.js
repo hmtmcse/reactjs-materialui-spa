@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {
-    Fade, LinearProgress, Checkbox,Snackbar
+    Checkbox
 } from '@material-ui/core';
+import {showLoader} from './common-helper'
+import AppSnackBar from './app-snack-bar'
 
-
-const SNACK_BAR_AUTO_HIDE_DURATION = 3000;
 
 export default class AppComponent extends Component {
-
-
 
     constructor(props) {
         super(props);
@@ -40,7 +38,11 @@ export default class AppComponent extends Component {
 
     hideProgressbar(){this.setState({isSystemProgressBarEnabled: false})}
 
-    closeSnackBar(){this.setState({showSystemSnackBar: false})}
+
+    closeSnackBar = () => {
+        this.setState({ showSystemSnackBar: false });
+    };
+
 
     showSuccessInfo(message){
         this.setState({
@@ -60,6 +62,7 @@ export default class AppComponent extends Component {
 
     handleChange = () => event => {
         this.setState({isSystemProgressBarEnabled: event.target.checked});
+        this.setState({showSystemSnackBar: event.target.checked});
     };
 
     appRender() {
@@ -68,31 +71,14 @@ export default class AppComponent extends Component {
         );
     }
 
+
+
+
     render() {
         return (
             <React.Fragment>
-
-                {
-                    this.state.isSystemProgressBarEnabled ? (<Fade in={this.state.isSystemProgressBarEnabled}>
-                        <LinearProgress color="primary"/>
-                    </Fade>) : ""
-                }
-
-                {
-                    this.state.showSystemSnackBar ? (
-                        <Snackbar
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'center',
-                            }}
-                            open={this.state.showSystemSnackBar}
-                            autoHideDuration={SNACK_BAR_AUTO_HIDE_DURATION}
-                            onClose={this.closeSnackBar}
-                        />
-                    ) : ""
-                }
-
-
+                {showLoader(this.state.isSystemProgressBarEnabled)}
+                <AppSnackBar variant={this.state.systemSnackBarVariant} isOpen={this.state.showSystemSnackBar} message={this.state.systemSnackBarMessage} onClose={this.closeSnackBar}/>
                 <Checkbox
                     checked={this.state.isSystemProgressBarEnabled}
                     onChange={this.handleChange('checkedA')}
