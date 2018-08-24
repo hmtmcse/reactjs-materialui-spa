@@ -28,9 +28,9 @@ class ComponentDemoPage extends AppComponent {
         return (
             <React.Fragment>
                 <Paper>
-                    <Button variant="contained" onClick={() => this.showSuccessInfo("Success Message")} color="primary" className={classes.button}>Success</Button>
-                    <Button variant="contained" onClick={() => this.showErrorInfo("Error Message")} color="secondary" className={classes.button}>Error</Button>
-                    <FormGroup row>
+                    <Button variant="contained" onClick={() => this.showSuccessInfo("Success Message")} color="primary" className={classes.button}>Success Info</Button>
+                    <Button variant="contained" onClick={() => this.showErrorInfo("Error Message")} color="secondary" className={classes.button}>Error Info</Button>
+                    <FormGroup row className={classes.button}>
                         <FormControlLabel control={<Checkbox value="checkbox1" />} onChange={this.showHideProgressBar()} label="Show Hide Progress bar"/>
                     </FormGroup>
                 </Paper>
