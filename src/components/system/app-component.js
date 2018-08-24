@@ -8,6 +8,35 @@ import AppSnackBar from './app-snack-bar'
 
 export default class AppComponent extends Component {
 
+    showProgressbar = () => {this.setState({isSystemProgressBarEnabled: true})};
+
+    hideProgressbar = () => {this.setState({isSystemProgressBarEnabled: false})};
+
+    closeSnackBar = () => {
+        this.setState({ showSystemSnackBar: false });
+    };
+
+    showSuccessInfo = (message) =>{
+        this.setState({
+            showSystemSnackBar: true,
+            systemSnackBarVariant: "success",
+            systemSnackBarMessage: message
+        });
+    };
+
+    showErrorInfo= (message) =>{
+        this.setState({
+            showSystemSnackBar: true,
+            systemSnackBarVariant: "error",
+            systemSnackBarMessage: message
+        });
+    };
+
+    handleChange = () => event => {
+        this.setState({isSystemProgressBarEnabled: event.target.checked});
+        this.setState({showSystemSnackBar: event.target.checked});
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -32,39 +61,6 @@ export default class AppComponent extends Component {
 
     postList(){}
 
-
-
-    showProgressbar(){this.setState({isSystemProgressBarEnabled: true})}
-
-    hideProgressbar(){this.setState({isSystemProgressBarEnabled: false})}
-
-
-    closeSnackBar = () => {
-        this.setState({ showSystemSnackBar: false });
-    };
-
-
-    showSuccessInfo(message){
-        this.setState({
-            showSystemSnackBar: true,
-            systemSnackBarVariant: "success",
-            systemSnackBarMessage: message
-        });
-    }
-
-    showErrorInfo(message){
-        this.setState({
-            showSystemSnackBar: true,
-            systemSnackBarVariant: "error",
-            systemSnackBarMessage: message
-        });
-    }
-
-    handleChange = () => event => {
-        this.setState({isSystemProgressBarEnabled: event.target.checked});
-        this.setState({showSystemSnackBar: event.target.checked});
-    };
-
     appRender() {
         return (
             <h1>AppComponent</h1>
@@ -79,12 +75,6 @@ export default class AppComponent extends Component {
             <React.Fragment>
                 {showLoader(this.state.isSystemProgressBarEnabled)}
                 <AppSnackBar variant={this.state.systemSnackBarVariant} isOpen={this.state.showSystemSnackBar} message={this.state.systemSnackBarMessage} onClose={this.closeSnackBar}/>
-                <Checkbox
-                    checked={this.state.isSystemProgressBarEnabled}
-                    onChange={this.handleChange('checkedA')}
-                    value="checkedA"
-                />
-
                 {this.appRender()}
             </React.Fragment>
         )
