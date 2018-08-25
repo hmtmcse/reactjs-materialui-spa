@@ -2,9 +2,10 @@ import { withStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import {
     TableRow, TableCell, TableHead, TableBody,TableFooter, TablePagination,
-    TableSortLabel,MenuItem, FormControlLabel, Checkbox, FormGroup, FormLabel,RadioGroup,
+    TableSortLabel,Table, FormControlLabel, Checkbox, FormGroup, FormLabel,RadioGroup,
     Card, CardContent, Typography, CardActions, CardHeader, CardMedia, Tooltip
 } from '@material-ui/core'
+import PropTypes from "prop-types";
 
 const styles = theme => ({
     root: {
@@ -12,27 +13,30 @@ const styles = theme => ({
     }
 });
 
-class SortableTableHeader extends Component {
+const headers = [
+    {sortKey: 'name', label: 'Display Name', numeric: false}
+];
+
+class AppSortableTableHeader extends Component {
     render () {
-        const { classes } = this.props;
+        const { sortOrder, sortByKey, clickToSortOrder, headers } = this.props;
         return (
             <TableHead>
                 <TableRow>
-                    {rows.map(row => {
+                    {headers.map(row => {
                         return (
                             <TableCell
-                                key={row.id}
+                                key={row.sortKey}
                                 numeric={row.numeric}
-                                padding={row.disablePadding ? 'none' : 'default'}
-                                sortDirection={orderBy === row.id ? order : false}>
+                                sortDirection={sortByKey === row.sortKey ? sortOrder : false}>
                                 <Tooltip
-                                    title="Sort"
+                                    title={"Sort by " + row.label}
                                     placement={row.numeric ? 'bottom-end' : 'bottom-start'}
                                     enterDelay={300}>
                                     <TableSortLabel
-                                        active={orderBy === row.id}
-                                        direction={order}
-                                        onClick={this.createSortHandler(row.id)}>
+                                        active={sortByKey === row.sortKey}
+                                        direction={sortOrder}
+                                        onClick={clickToSortOrder(row.sortKey)}>
                                         {row.label}
                                     </TableSortLabel>
                                 </Tooltip>
@@ -45,6 +49,41 @@ class SortableTableHeader extends Component {
     }
 }
 
+AppSortableTableHeader.propTypes = {
+    clickToSortOrder: PropTypes.func.isRequired,
+    sortOrder: PropTypes.string.isRequired,
+    sortByKey: PropTypes.string.isRequired,
+    headers: PropTypes.map.isRequired,
+};
 
 
-export default withStyles(styles)(SortableTableHeader);
+class AppTable extends Component {
+
+    render(){
+        const {
+            sortOrder, sortByKey, clickToSortOrder, headers,
+            tableData
+        } = this.props;
+
+        return(
+            <Table>
+                <SortableTableHeader clickToSortOrder={clickToSortOrder} sortOrder={sortOrder} sortByKey={sortByKey} headers={headers}/>
+                <TableBody>
+
+                </TableBody>
+            </Table>
+        );
+    }
+}
+
+AppTable.propTypes = {
+    clickToSortOrder: PropTypes.func.isRequired,
+    sortOrder: PropTypes.string.isRequired,
+    sortByKey: PropTypes.string.isRequired,
+    headers: PropTypes.map.isRequired,
+
+    tableData: PropTypes.map.isRequired,
+};
+
+
+export default withStyles(styles)(AppTable);

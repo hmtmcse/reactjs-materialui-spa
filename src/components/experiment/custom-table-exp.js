@@ -2,22 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import {lighten} from '@material-ui/core/styles/colorManipulator';
+import {
+    TableRow, TableCell, TableHead, TableBody, TableFooter, TablePagination, Menu, MenuItem,
+    TableSortLabel, Table, FormControlLabel, Checkbox, FormGroup, FormLabel, RadioGroup,
+    IconButton, CardContent, Typography, CardActions, CardHeader, CardMedia, Tooltip, Button, Grid, TextField
+} from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {APPLICATION_NAME} from "../system/app-constant";
 
 let counter = 0;
 
@@ -41,7 +33,7 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-    {id: 'name', numeric: true, disablePadding: false, label: 'Dessert (100g serving)'},
+    {id: 'name', numeric: false, disablePadding: false, label: 'Dessert (100g serving)'},
     {id: 'calories', numeric: true, disablePadding: false, label: 'Calories'},
     {id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)'},
     {id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)'},
@@ -82,6 +74,9 @@ class EnhancedTableHead extends React.Component {
                             </TableCell>
                         );
                     }, this)}
+                    <TableCell numeric>
+                       Actions
+                    </TableCell>
                 </TableRow>
             </TableHead>
         );
@@ -109,10 +104,19 @@ const styles = theme => ({
     tableWrapper: {
         overflowX: 'auto',
     },
+    mainActionArea : {
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "8px",
+    },
+    marginToLeft : {
+        marginLeft: theme.spacing.unit,
+    },
 });
 
 class AppTable extends React.Component {
     state = {
+        tableActionMenuOpen: false,
         order: 'asc',
         orderBy: 'calories',
         selected: [],
@@ -147,11 +151,13 @@ class AppTable extends React.Component {
     };
 
     handleSelectAllClick = (event, checked) => {
-        if (checked) {
-            this.setState(state => ({selected: state.data.map(n => n.id)}));
-            return;
-        }
-        this.setState({selected: []});
+        console.log("yes")
+        this.setState({tableActionMenuOpen:true})
+    };
+
+    handleTableActionMenuClick = (event, checked) => {
+        console.log("yes")
+        this.setState({tableActionMenuOpen:true})
     };
 
     handleClick = (event, id) => {
@@ -191,66 +197,92 @@ class AppTable extends React.Component {
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
         return (
-            <Paper className={classes.root}>
-                <div className={classes.tableWrapper}>
-                    <Table className={classes.table} aria-labelledby="tableTitle">
-                        <EnhancedTableHead
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={this.handleSelectAllClick}
-                            onRequestSort={this.handleRequestSort}
-                            rowCount={data.length}
-                        />
-                        <TableBody>
-                            {data
-                                .sort(getSorting(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(n => {
-                                    const isSelected = this.isSelected(n.id);
-                                    return (
-                                        <TableRow
-                                            hover
-                                            onClick={event => this.handleClick(event, n.id)}
-                                            role="checkbox"
-                                            aria-checked={isSelected}
-                                            tabIndex={-1}
-                                            key={n.id}
-                                            selected={isSelected}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                {n.name}
-                                            </TableCell>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
-                                            <TableCell numeric>{n.carbs}</TableCell>
-                                            <TableCell numeric>{n.protein}</TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{height: 49 * emptyRows}}>
-                                    <TableCell colSpan={6}/>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-                <TablePagination
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
-            </Paper>
+            <React.Fragment>
+                <Paper className={classes.mainActionArea}>
+                    <div>
+                        <Typography variant="headline">Table Name</Typography>
+                    </div>
+                    <div>
+                        <Button variant="contained" color="primary" >Create</Button>
+                        <Button className={classes.marginToLeft} variant="contained" color="primary" >Reload</Button>
+                    </div>
+                </Paper>
+                <Paper className={classes.root}>
+                    <div className={classes.tableWrapper}>
+                        <Table className={classes.table} aria-labelledby="tableTitle">
+                            <EnhancedTableHead
+                                numSelected={selected.length}
+                                order={order}
+                                orderBy={orderBy}
+                                onSelectAllClick={this.handleSelectAllClick}
+                                onRequestSort={this.handleRequestSort}
+                                rowCount={data.length}
+                            />
+                            <TableBody>
+                                {data
+                                    .sort(getSorting(order, orderBy))
+                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                    .map(n => {
+                                        const isSelected = this.isSelected(n.id);
+                                        return (
+                                            <TableRow
+                                                hover
+                                                onClick={event => this.handleClick(event, n.id)}
+                                                role="checkbox"
+                                                aria-checked={isSelected}
+                                                tabIndex={-1}
+                                                key={n.id}
+                                                selected={isSelected}
+                                            >
+                                                <TableCell component="th" scope="row">
+                                                    {n.name}
+                                                </TableCell>
+                                                <TableCell numeric>{n.calories}</TableCell>
+                                                <TableCell numeric>{n.fat}</TableCell>
+                                                <TableCell numeric>{n.carbs}</TableCell>
+                                                <TableCell numeric>{n.protein}</TableCell>
+                                                <TableCell numeric>
+                                                    <React.Fragment>
+                                                        <IconButton onClick={this.handleTableActionMenuClick}>
+                                                            <MoreVertIcon/>
+                                                        </IconButton>
+                                                        <Menu open={this.state.tableActionMenuOpen}>
+                                                            <MenuItem>Profile</MenuItem>
+                                                            <MenuItem>My account</MenuItem>
+                                                            <MenuItem>Logout</MenuItem>
+                                                        </Menu>
+                                                    </React.Fragment>
+
+
+                                                </TableCell>
+                                            </TableRow>
+                                        );
+                                    })}
+                                {emptyRows > 0 && (
+                                    <TableRow style={{height: 49 * emptyRows}}>
+                                        <TableCell colSpan={6}/>
+                                    </TableRow>
+                                )}
+                            </TableBody>
+                        </Table>
+                    </div>
+                    <TablePagination
+                        component="div"
+                        count={data.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{
+                            'aria-label': 'Previous Page',
+                        }}
+                        nextIconButtonProps={{
+                            'aria-label': 'Next Page',
+                        }}
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    />
+                </Paper>
+            </React.Fragment>
+
         );
     }
 }
