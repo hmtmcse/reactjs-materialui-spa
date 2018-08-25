@@ -10,9 +10,10 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import TableChart from '@material-ui/icons/TableChart';
 import Edit from '@material-ui/icons/Edit';
+import AppTable from './../components/experiment/custom-table-exp';
 
 
-const PageRoutes = [
+const PageRoutesMap = [
     {
         path: "/dashboard",
         name: "Dashboard",
@@ -24,6 +25,12 @@ const PageRoutes = [
         name: "Table",
         icon:TableChart,
         component: TablePage
+    },
+    {
+        path: "/app-table",
+        name: "App Table",
+        icon:TableChart,
+        component: AppTable
     },
     {
         path: "/form",
@@ -44,7 +51,7 @@ const PageRoutes = [
     }
 ];
 
-const LayoutsRoutes = [
+const LayoutsRoutesMap = [
     {
         path: "/login",
         component: LoginPage,
@@ -68,7 +75,7 @@ const RouteWithSubRoutes = route => (
 const AppRouter = () => (
     <Router>
         <React.Fragment>
-            {PageRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+            {PageRoutesMap.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
         </React.Fragment>
     </Router>
 );
@@ -76,14 +83,14 @@ const AppRouter = () => (
 const LayoutRouter = () => (
     <Router>
         <React.Fragment>
-            {LayoutsRoutes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+            {LayoutsRoutesMap.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
         </React.Fragment>
     </Router>
 );
 
 export {
-    PageRoutes,
+    PageRoutesMap,
     AppRouter,
-    LayoutsRoutes,
+    LayoutsRoutesMap,
     LayoutRouter
 };

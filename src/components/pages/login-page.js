@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import LockIcon from '@material-ui/icons/LockOutlined';
+import {APPLICATION_NAME} from "../system/app-constant";
 
 
 class LoginPage extends Component {
@@ -19,7 +20,7 @@ class LoginPage extends Component {
                         <Avatar className={classes.avatar}>
                             <LockIcon />
                         </Avatar>
-                        <Typography variant="headline">Login to Task Manager</Typography>
+                        <Typography variant="headline">{APPLICATION_NAME}</Typography>
                         <form method="get" action="/dashboard" className={classes.form}>
                             <FormControl margin="normal" required fullWidth>
                                 <InputLabel htmlFor="email">Email Address</InputLabel>

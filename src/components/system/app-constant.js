@@ -1,6 +1,8 @@
 
 const API_BASE_URL = "";
+const APPLICATION_NAME = "HMTMCSE";
 
 export {
-    API_BASE_URL
+    API_BASE_URL,
+    APPLICATION_NAME
 }

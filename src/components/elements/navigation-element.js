@@ -4,19 +4,14 @@ import {
     Icon, ListItemIcon, ListItemText, MenuItem, MenuList, Toolbar, Typography, withStyles
 } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
-import {PageRoutes} from './../../config/router';
+import {PageRoutesMap} from './../../config/router';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import MenuIcon from "../../../node_modules/@material-ui/icons/Menu";
 import {navigationElementJSS} from "../../assets/jss/application-jss";
-
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Route from "react-router-dom/es/Route";
+import {APPLICATION_NAME} from './../system/app-constant'
 
 
 class NavigationElement extends Component {
@@ -50,7 +45,7 @@ class NavigationElement extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="title" color="inherit" noWrap className={classes.title}>
-                            HMTMCSE
+                            {APPLICATION_NAME}
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -70,7 +65,7 @@ class NavigationElement extends Component {
                     </div>
                     <Divider />
                     <MenuList>
-                        {PageRoutes.map((route, i) => {
+                        {PageRoutesMap.map((route, i) => {
                             return(
                                 <NavLink to={route.path} className={classes.removeDecoration} key={i}>
                                     <MenuItem button>
