@@ -112,6 +112,9 @@ const styles = theme => ({
     marginToLeft : {
         marginLeft: theme.spacing.unit,
     },
+    displayInline : {
+        display: "inline",
+    },
 });
 
 class AppTable extends React.Component {
@@ -203,7 +206,10 @@ class AppTable extends React.Component {
                         <Typography variant="headline">Table Name</Typography>
                     </div>
                     <div>
-                        <Button variant="contained" color="primary" >Create</Button>
+                        <form className={classes.displayInline}>
+                            <TextField placeholder="search" name="search"/>
+                        </form>
+                        <Button className={classes.marginToLeft} variant="contained" color="primary" >Create</Button>
                         <Button className={classes.marginToLeft} variant="contained" color="primary" >Reload</Button>
                     </div>
                 </Paper>
