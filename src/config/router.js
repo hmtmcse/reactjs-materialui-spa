@@ -6,6 +6,8 @@ import ComponentDemoPage from './../components/pages/component-demo-page';
 import TablePage from './../components/pages/table-page';
 import FormPage from './../components/pages/form-page';
 import TrelloPage from './../components/pages/trello-page';
+import TaskPage from './../components/pages/task-page';
+import ExperimentPage from './../components/pages/experiment-page';
 import MainLayout from './../layouts/main-layout';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
@@ -44,6 +46,18 @@ const PageRoutesMap = [
         name: "Trello",
         icon:Edit,
         component: TrelloPage
+    },
+    {
+        path: "/task",
+        name: "Task",
+        icon:Edit,
+        component: TaskPage
+    },
+    {
+        path: "/experiment",
+        name: "Experiment",
+        icon:Edit,
+        component: ExperimentPage
     },
     {
         path: "/component-demo",
