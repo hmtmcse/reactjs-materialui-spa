@@ -57,19 +57,20 @@ class EnhancedTableHead extends React.Component {
                                 key={row.id}
                                 numeric={row.numeric}
                                 padding={row.disablePadding ? 'none' : 'default'}
-                                sortDirection={orderBy === row.id ? order : false}
-                            >
+                                sortDirection={orderBy === row.id ? order : false}>
+
                                 <Tooltip
                                     title="Sort"
-                                    enterDelay={300}
-                                >
+                                    enterDelay={300}>
+
                                     <TableSortLabel
                                         active={orderBy === row.id}
                                         direction={order}
-                                        onClick={this.createSortHandler(row.id)}
-                                    >
+                                        onClick={this.createSortHandler(row.id)}>
+
                                         {row.label}
                                     </TableSortLabel>
+
                                 </Tooltip>
                             </TableCell>
                         );
@@ -222,8 +223,8 @@ class AppTable extends React.Component {
                                 orderBy={orderBy}
                                 onSelectAllClick={this.handleSelectAllClick}
                                 onRequestSort={this.handleRequestSort}
-                                rowCount={data.length}
-                            />
+                                rowCount={data.length}/>
+
                             <TableBody>
                                 {data
                                     .sort(getSorting(order, orderBy))

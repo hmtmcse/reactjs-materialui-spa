@@ -14,6 +14,7 @@ import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import TableChart from '@material-ui/icons/TableChart';
 import Edit from '@material-ui/icons/Edit';
 import AppTable from './../components/experiment/custom-table-exp';
+import Checkout from './../components/experiment/checkout/Checkout';
 
 
 const PageRoutesMap = [
@@ -76,6 +77,10 @@ const LayoutsRoutesMap = [
     {
         path: "/login",
         component: LoginPage,
+    },
+    {
+        path: "/checkout",
+        component: Checkout,
     },
     {
         path: "/",
