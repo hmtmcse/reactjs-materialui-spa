@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {LayoutRouter} from './config/router';
-import RouteConfigExample from "./components/experiment/nested-rout";
+import UrlMapping from "./components/experiment/url-map/url-mapping";
 
 
-ReactDOM.render(<RouteConfigExample/>, document.getElementById('root'));
+ReactDOM.render(<UrlMapping/>, document.getElementById('root'));
