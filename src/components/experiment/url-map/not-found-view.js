@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import RaViewComponent from "../artifacts/ra-view-component";
 
 
 const styles = theme => ({
@@ -9,7 +8,7 @@ const styles = theme => ({
     }
 });
 
-class NotFoundView extends RaViewComponent {
+class NotFoundView extends Component {
     render () {
         const { classes } = this.props;
         return <h1 className={classes.root}>404 Not Found!!   </h1>;
