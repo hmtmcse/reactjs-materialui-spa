@@ -5,6 +5,7 @@ import {
     Select,MenuItem, FormControlLabel, Checkbox, FormGroup, FormLabel,RadioGroup,
     Card, CardContent, CardActions, CardHeader, Grid
 } from '@material-ui/core'
+import FormHelperText from "@material-ui/core/es/FormHelperText/FormHelperText";
 
 const styles = theme => ({
     root: {
@@ -56,11 +57,12 @@ class FormPage extends Component {
                             <Grid item xs={6}>
                                 <FormControl fullWidth>
                                     <InputLabel>Country</InputLabel>
-                                    <Select value={this.state.countrySelect} onChange={this.countrySelectChange}>
+                                    <Select value={this.state.countrySelect} onChange={this.countrySelectChange} error={true} name="syz">
                                         <MenuItem value="bangladesh">Bangladesh</MenuItem>
                                         <MenuItem value="australia">Australia</MenuItem>
                                         <MenuItem value="usa">USA</MenuItem>
                                     </Select>
+                                    <FormHelperText error={true} children="Yooo Buddy"/>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={6}>
@@ -74,19 +76,19 @@ class FormPage extends Component {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={6}>
-                                <FormGroup row>
+                                <FormControl>
                                     <FormControlLabel control={<Checkbox value="checkedC" />} label="Single Checkbox" />
-                                </FormGroup>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormGroup row>
-                                    <FormControlLabel control={<Checkbox value="checkbox1" />} label="Checkbox 1"/>
-                                    <FormControlLabel control={<Checkbox value="checkbox2" />} label="Checkbox 2" />
-                                    <FormControlLabel control={<Checkbox value="checkbox3" />} label="Checkbox 3"/>
-                                </FormGroup>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl>
+                                    <FormControlLabel control={<Checkbox value="checkbox1" />} label="Checkbox 1"/>
+                                    <FormControlLabel control={<Checkbox value="checkbox2" />} label="Checkbox 2" />
+                                    <FormControlLabel control={<Checkbox value="checkbox3" />} label="Checkbox 3"/>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl error={true}>
                                     <FormLabel>Gender</FormLabel>
                                     <RadioGroup
                                         value={this.state.genderRadio}
@@ -103,6 +105,7 @@ class FormPage extends Component {
                                             label="(Disabled option)"
                                         />
                                     </RadioGroup>
+                                    <FormHelperText error={true} children="Yooo Buddy"/>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12}>
