@@ -11,7 +11,10 @@ export default class MarkdownToJSX extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            textBoxData: "# Hello world!",
+            textBoxData: "## Check Blow things\n" +
+                "1. Data binding\n" +
+                "2. Link upload\n" +
+                "4. Other Data\n",
         };
     }
 
