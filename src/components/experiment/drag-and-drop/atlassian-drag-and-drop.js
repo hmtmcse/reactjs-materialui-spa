@@ -74,8 +74,7 @@ export  default class AtlassianDragAndDrop extends Component {
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
+                            style={getListStyle(snapshot.isDraggingOver)}>
                             {this.state.items.map((item, index) => (
                                 <Draggable key={item.id} draggableId={item.id} index={index}>
                                     {(provided, snapshot) => (
