@@ -8,8 +8,10 @@ import AtlassianDragAndDrop from "./components/experiment/drag-and-drop/atlassia
 import AtlassianDragAndDropMui from "./components/experiment/drag-and-drop/atlassian-drag-and-drop-mui";
 import RecipeReviewCardSimple from "./components/experiment/collapse-expanded/recipe-review-card-simple";
 import AtlassianDragAndDropNested from "./components/experiment/drag-and-drop/atlassian-drag-and-drop-nested";
+import {SimpleMenu} from "./components/experiment/menu/simple-menu";
 
-ReactDOM.render(<AtlassianDragAndDropNested/>, document.getElementById('root'));
+ReactDOM.render(<SimpleMenu/>, document.getElementById('root'));
+// ReactDOM.render(<AtlassianDragAndDropNested/>, document.getElementById('root'));
 // ReactDOM.render(<RecipeReviewCardSimple/>, document.getElementById('root'));
 // ReactDOM.render(<AtlassianDragAndDropMui/>, document.getElementById('root'));
 // ReactDOM.render(<DatePickerEx1/>, document.getElementById('root'));
