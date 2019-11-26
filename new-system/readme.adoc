@@ -1,0 +1,11 @@
+
+
+
+npx create-react-app react-typescript --typescript
+
+cd react-typescript
+yarn start
+
+
+yarn add @material-ui/core
+yarn add @types/material-ui

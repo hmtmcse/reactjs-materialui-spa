@@ -1,0 +1,10 @@
+=== Box
+. overflow
+.. hidden
+.. visible
+. textOverflow
+.. clip
+.. ellipsis
+. visibility
+.. visible
+.. hidden
